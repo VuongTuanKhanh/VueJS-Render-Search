@@ -26,17 +26,10 @@ export default {
   methods: {
     renderTableData() {
       return this.items.map(item => {
-        let { Title, Type, Owner, Date, Starred, Trash } = item;
-        return (
-          <tr>
-            <td>{Title}</td>
-            <td>{Type}</td>
-            <td>{Owner}</td>
-            <td>{Date}</td>
-            <td>{Starred}</td>
-            <td>{Trash}</td>
-          </tr>
-        );
+        let rowData = Object.values(item).map(values => {
+          return <td>{values}</td>;
+        });
+        return <tr>{rowData}</tr>;
       });
     }
   }
