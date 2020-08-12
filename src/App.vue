@@ -12,38 +12,13 @@ export default {
       },
       props: {
         items: this.items,
-        query: this.query,
-        advanceQuery: this.advanceQuery
+        query: this.query
       }
     });
   },
   data() {
     return {
-      fields: {
-        Owners: null,
-        Types: null
-      },
-      items: [],
-      query: {
-        Title: "",
-        Type: "",
-        Owner: "",
-        Date: "",
-        Starred: "",
-        Trash: ""
-      },
-      advanceQuery: {
-        Title: "",
-        Type: "",
-        Owner: "",
-        Date: "",
-        Starred: "",
-        Trash: "",
-        startDate: "",
-        endDate: ""
-      },
-      startDate: "",
-      endDate: ""
+      items: []
     };
   },
   created() {
@@ -63,21 +38,7 @@ export default {
         console.log(error.response);
       });
   },
-  methods: {
-    AddItemToList(newItem) {
-      this.items.push(newItem);
-    },
-    ExecuteInstantSearch(newQuery) {
-      this.query = newQuery;
-    },
-    ExecuteAdvanceSearch(newQuery) {
-      this.advanceQuery = newQuery;
-    },
-    ClearData() {
-      this.startDate = "";
-      this.endDate = "";
-    }
-  }
+  methods: {}
 };
 </script>
 
