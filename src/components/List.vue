@@ -1,34 +1,43 @@
-<template>
-  <div>
-    <table border="1">
-      <tr>
-        <td></td>
-        <td><h3>Title</h3></td>
-        <td><h3>Type</h3></td>
-        <td><h3>Owner</h3></td>
-        <td><h3>Date</h3></td>
-        <td><h3>Starred</h3></td>
-        <td><h3>Trash</h3></td>
-      </tr>
-      <tr v-for="(item, index) in items" :key="item.Title">
-        <td>{{ index }}</td>
-        <td>{{ item.Title }}</td>
-        <td>{{ item.Type }}</td>
-        <td>{{ item.Owner }}</td>
-        <td>{{ item.Date }}</td>
-        <td>{{ item.Starred }}</td>
-        <td>{{ item.Trash }}</td>
-      </tr>
-    </table>
-  </div>
-</template>
-
 <script>
 export default {
   name: "List",
+  render() {
+    let main_Title = this.titles.map(function(title) {
+      return <td>{title}</td>;
+    });
+
+    return (
+      <table border="1">
+        <tr>{main_Title}</tr>
+        {this.renderTableData()}
+      </table>
+    );
+  },
+  data() {
+    return {
+      titles: ["Title", "Type", "Owner", "Date", "Star", "Trash"]
+    };
+  },
   props: {
     items: {
       type: Array
+    }
+  },
+  methods: {
+    renderTableData() {
+      return this.items.map(item => {
+        let { Title, Type, Owner, Date, Starred, Trash } = item;
+        return (
+          <tr>
+            <td>{Title}</td>
+            <td>{Type}</td>
+            <td>{Owner}</td>
+            <td>{Date}</td>
+            <td>{Starred}</td>
+            <td>{Trash}</td>
+          </tr>
+        );
+      });
     }
   }
 };
@@ -46,6 +55,7 @@ tr {
 
 td {
   width: 200px;
+  padding: 15px;
   text-align: center;
 }
 </style>
