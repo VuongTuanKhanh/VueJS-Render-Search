@@ -3,7 +3,11 @@ export default {
   name: "List",
   render() {
     let main_Title = this.titles.map(function(title) {
-      return <td>{title}</td>;
+      return (
+        <td>
+          <b>{title}</b>
+        </td>
+      );
     });
 
     return (
