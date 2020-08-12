@@ -1,20 +1,15 @@
 <script>
 import EventService from "@/services/EventService.js";
 import List from "@/components/List.vue";
+import SearchBar from "@/components/SearchBar.vue";
 export default {
-  components: {
-    List
-  },
-  render(h) {
-    return h(List, {
-      class: {
-        list: true
-      },
-      props: {
-        items: this.items,
-        query: this.query
-      }
-    });
+  render() {
+    return (
+      <div id="app">
+        <SearchBar />
+        <List propsItems={this.items} />
+      </div>
+    );
   },
   data() {
     return {
