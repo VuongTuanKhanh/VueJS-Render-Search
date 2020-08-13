@@ -7,42 +7,45 @@ export default {
         <div class="search-container">
           <input
             type="text"
-            placeholder="Search.."
+            placeholder="Search..."
             class="search-bar"
-            onClick={this.openForm}
+            onClick={() => this.openForm("myForm")}
           />
           <button class="close-button">X</button>
         </div>
         <div class="form-popup" id="myForm">
-          <div class="form-container">{this.search_Type_List()}</div>
+          <div class="form-container">
+            <button class="btn" onClick={() => this.createQuery("Site")}>
+              Sites
+            </button>
+            <button class="btn" onClick={() => this.createQuery("Page")}>
+              Pages
+            </button>
+            <button class="btn" onClick={() => this.createQuery("Advance")}>
+              Advance Search
+            </button>
+          </div>
         </div>
       </div>
     );
   },
   methods: {
-    openForm() {
-      document.getElementById("myForm").style.display = "block";
+    openForm(id) {
+      document.getElementById(id).style.display = "block";
     },
-    closeForm() {
-      document.getElementById("myForm").style.display = "none";
+    closeForm(id) {
+      document.getElementById(id).style.display = "none";
     },
-    createQuery() {
-      console.log("type");
-    },
-    search_Type_List() {
-      return this.search_Types.map(function(type) {
-        return (
-          <button class="btn" onClick="createQuery()">
-            {type}
-          </button>
-        );
-      });
+    createQuery(type) {
+      this.closeForm("myForm");
+      let queryString = "";
+      if (type == "Site") {
+        queryString = "Type:Site";
+      } else if (type == "Page") {
+        queryString = "Type:Page";
+      }
+      this.$emit("handleSubmit", queryString);
     }
-  },
-  data() {
-    return {
-      search_Types: ["Sites", "Pages", "Advance Search"]
-    };
   }
 };
 </script>

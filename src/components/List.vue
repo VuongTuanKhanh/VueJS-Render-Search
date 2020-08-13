@@ -13,23 +13,46 @@ export default {
     return (
       <table border="1">
         <tr>{main_Title}</tr>
-        {this.renderTableData()}
+        {this.renderTableData}
       </table>
     );
   },
   data() {
     return {
-      titles: ["Title", "Type", "Owner", "Date", "Star", "Trash"]
+      titles: ["Title", "Type", "Owner", "Date", "Star", "Trash"],
+      showList: this.items
     };
   },
   props: {
     items: {
       type: Array
+    },
+    queryString: {
+      type: String
     }
   },
-  methods: {
+  watch: {
+    items() {
+      this.showList = this.items;
+    },
+    queryString() {
+      console.log("List:", this.queryString);
+      let filteredList = [];
+      for (let item of this.items) {
+        let itemQueryString = "";
+        Object.entries(item).map(
+          ([key, value]) => (itemQueryString += key + ":" + value + " ")
+        );
+        if (itemQueryString.includes(this.queryString)) {
+          filteredList.push(item);
+        }
+      }
+      this.showList = filteredList;
+    }
+  },
+  computed: {
     renderTableData() {
-      return this.items.map(item => {
+      return this.showList.map(item => {
         let rowData = Object.values(item).map(values => {
           return <td>{values}</td>;
         });

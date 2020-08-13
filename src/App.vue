@@ -6,14 +6,15 @@ export default {
   render() {
     return (
       <div id="app">
-        <SearchBar />
-        <List propsItems={this.items} />
+        <SearchBar onHandleSubmit={this.handleSubmitRequest} />
+        <List propsItems={this.items} propsQueryString={this.queryString} />
       </div>
     );
   },
   data() {
     return {
-      items: []
+      items: [],
+      queryString: ""
     };
   },
   created() {
@@ -33,7 +34,11 @@ export default {
         console.log(error.response);
       });
   },
-  methods: {}
+  methods: {
+    handleSubmitRequest(queryString) {
+      this.queryString = queryString;
+    }
+  }
 };
 </script>
 
