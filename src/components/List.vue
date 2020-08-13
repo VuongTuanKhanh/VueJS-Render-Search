@@ -43,7 +43,14 @@ export default {
         Object.entries(item).map(
           ([key, value]) => (itemQueryString += key + ":" + value + " ")
         );
-        if (itemQueryString.includes(this.queryString)) {
+        let isFalse = false;
+        for (let condition of this.queryString.split(" ")) {
+          if (!itemQueryString.includes(condition)) {
+            isFalse = true;
+            break;
+          }
+        }
+        if (!isFalse) {
           filteredList.push(item);
         }
       }
