@@ -14,7 +14,7 @@ export default {
           <button class="close-button">X</button>
         </div>
         <div class="form-popup" id="myForm">
-          <form class="form-container">{this.search_Type_List()}</form>
+          <div class="form-container">{this.search_Type_List()}</div>
         </div>
       </div>
     );
@@ -31,7 +31,11 @@ export default {
     },
     search_Type_List() {
       return this.search_Types.map(function(type) {
-        return <button class="btn">{type}</button>;
+        return (
+          <button class="btn" onClick="createQuery()">
+            {type}
+          </button>
+        );
       });
     }
   },
@@ -65,7 +69,7 @@ export default {
   cursor: pointer;
   max-width: 98%;
   width: 100%;
-  margin: 10px 20px 10px 10px;
+  margin: 10px 20px 0px 10px;
   opacity: 0.8;
 }
 .form-container {
