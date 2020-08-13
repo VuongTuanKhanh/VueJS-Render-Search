@@ -9,6 +9,7 @@ export default {
             type="text"
             placeholder="Search..."
             class="search-bar"
+            id="searchBar"
             onClick={() => this.openForm("myForm")}
           />
           <button class="close-button">X</button>
@@ -44,6 +45,7 @@ export default {
       } else if (type == "Page") {
         queryString = "Type:Page";
       }
+      document.getElementById("searchBar").value = queryString;
       this.$emit("handleSubmit", queryString);
     }
   }
