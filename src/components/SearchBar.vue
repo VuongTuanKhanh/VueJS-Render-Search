@@ -22,7 +22,7 @@ export default {
             <button class="btn" onClick={() => this.createQuery("Page")}>
               Pages
             </button>
-            <button class="btn" onClick={() => this.createQuery("Advance")}>
+            <button class="btn" onClick={() => this.closeForm("myForm")}>
               Advance Search
             </button>
           </div>
@@ -31,11 +31,17 @@ export default {
     );
   },
   methods: {
-    openForm(id) {
-      document.getElementById(id).style.display = "block";
+    openForm(openid, closeid = "") {
+      document.getElementById(openid).style.display = "block";
+      if (closeid) {
+        document.getElementById(closeid).style.display = "none";
+      }
     },
-    closeForm(id) {
-      document.getElementById(id).style.display = "none";
+    closeForm(closeid, openid = "") {
+      document.getElementById(closeid).style.display = "none";
+      if (openid) {
+        document.getElementById(openid).style.display = "block";
+      }
     },
     createQuery(type) {
       this.closeForm("myForm");
