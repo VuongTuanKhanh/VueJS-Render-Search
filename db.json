@@ -5,7 +5,7 @@
         "Owners": ["Anyone", "Owned by me", "Not owned by me", "Specific Person..."],
         "Persons": ["admin", "designer", "editor", "sysadmin"],
         "Date": ["Anytime", "Today", "Yesterday", "Last 7 days", "Last 30 days", "Last 90 days", "Custom..."],
-        "Status": ["Starred", "In Trash"]
+        "Status": ["Starred", "Trash"]
     },
     "items": [
         {

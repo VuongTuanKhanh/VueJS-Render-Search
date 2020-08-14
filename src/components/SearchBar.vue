@@ -54,7 +54,9 @@ export default {
       type: "",
       owner: "",
       name: "",
-      isNotme: false
+      isNotme: false,
+      starred: "",
+      trash: ""
     };
   },
   methods: {
@@ -135,12 +137,18 @@ export default {
       let fieldName = this.fields.Status.map(type => {
         return (
           <span>
-            <input type="checkbox" />
+            <input type="checkbox" id={type} onChange={this.changeStatus} />
             <span>{type}</span>
           </span>
         );
       });
       return <div>{fieldName}</div>;
+    },
+    changeStatus() {
+      this.starred =
+        "Starred:" + document.getElementById("Starred").checked + " ";
+      this.trash = "Trash:" + document.getElementById("Trash").checked + " ";
+      console.log(this.starred, this.trash);
     },
     SearchTerm() {
       return (
