@@ -20,7 +20,10 @@ export default {
   data() {
     return {
       titles: ["Title", "Type", "Owner", "Date", "Star", "Trash"],
-      showList: this.items
+      showList: this.items,
+      startDate: "",
+      endDate: "",
+      isNotme: ""
     };
   },
   props: {
@@ -29,14 +32,13 @@ export default {
     },
     queryString: {
       type: String
+    },
+    conditions: {
+      type: String
     }
   },
-  watch: {
-    items() {
-      this.showList = this.items;
-    },
-    queryString() {
-      console.log("List:", this.queryString);
+  methods: {
+    filtering() {
       let filteredList = [];
       for (let item of this.items) {
         let itemQueryString = "";
@@ -55,6 +57,28 @@ export default {
         }
       }
       this.showList = filteredList;
+      if (this.isNotme == "true") {
+        for (let i in this.showList) {
+          if (this.showList[i].Owner == "Khanh") {
+            delete this.showList[i];
+          }
+        }
+      }
+    }
+  },
+  watch: {
+    items() {
+      this.showList = this.items;
+    },
+    conditions() {
+      let conditions = this.conditions.split("&");
+      this.startDate = conditions[0];
+      this.endDate = conditions[1];
+      this.isNotme = conditions[2];
+      this.filtering();
+    },
+    queryString() {
+      this.filtering();
     }
   },
   computed: {

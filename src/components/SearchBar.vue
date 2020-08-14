@@ -193,7 +193,11 @@ export default {
       for (let i of document.getElementsByClassName("date-range")) {
         i.style.display = "none";
       }
-      if (value == "Today") {
+      if (value == "Anytime") {
+        this.startDate = "";
+        this.endDate = "";
+        this.date = "";
+      } else if (value == "Today") {
         this.date =
           "Date:" +
           new Date()
@@ -281,6 +285,7 @@ export default {
       }
     },
     changeOwner(e) {
+      this.isNotme = false;
       let value = e.target.value;
       if (value == "Specific Person...") {
         this.owner = "";
@@ -299,13 +304,8 @@ export default {
       }
     },
     handleSubmit() {
-      this.$emit(
-        "submitQuery",
-        this.queryString,
-        this.isNotme,
-        this.startDate,
-        this.endDate
-      );
+      this.$emit("submitQuery", this.queryString, this.conditions);
+      this.closeAllForm();
     }
   },
   computed: {
@@ -319,6 +319,9 @@ export default {
         this.date +
         this.term
       );
+    },
+    conditions() {
+      return this.startDate + "&" + this.endDate + "&" + this.isNotme;
     }
   }
 };

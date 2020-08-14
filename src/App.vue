@@ -11,7 +11,11 @@ export default {
           onHandleSubmit={this.handleSubmitRequest}
           onSubmitQuery={this.handleAdvanceRequest}
         />
-        <List propsItems={this.items} propsQueryString={this.queryString} />
+        <List
+          propsItems={this.items}
+          propsQueryString={this.queryString}
+          propsConditions={this.conditions}
+        />
       </div>
     );
   },
@@ -19,7 +23,8 @@ export default {
     return {
       items: [],
       fields: {},
-      queryString: ""
+      queryString: "",
+      conditions: ""
     };
   },
   created() {
@@ -43,8 +48,9 @@ export default {
     handleSubmitRequest(queryString) {
       this.queryString = queryString;
     },
-    handleAdvanceRequest(queryString, isNotme, startDate, endDate) {
-      console.log(queryString, isNotme, startDate, endDate);
+    handleAdvanceRequest(queryString, conditions) {
+      this.queryString = queryString;
+      this.conditions = conditions;
     }
   }
 };
