@@ -56,7 +56,8 @@ export default {
       name: "",
       isNotme: false,
       starred: "",
-      trash: ""
+      trash: "",
+      date: ""
     };
   },
   methods: {
@@ -129,7 +130,9 @@ export default {
       return (
         <div>
           <label>Date</label>
-          <select>{options}</select>
+          <select onChange={$event => this.changeDate($event)}>
+            {options}
+          </select>
         </div>
       );
     },
@@ -149,6 +152,29 @@ export default {
         "Starred:" + document.getElementById("Starred").checked + " ";
       this.trash = "Trash:" + document.getElementById("Trash").checked + " ";
       console.log(this.starred, this.trash);
+    },
+    changeDate(e) {
+      let value = e.target.value;
+      if (value == "Anytime") {
+        this.date = "";
+      } else if (value == "Today") {
+        this.date =
+          "Date:" +
+          new Date()
+            .toJSON()
+            .slice(0, 10)
+            .replace(/-/g, "-") +
+          " ";
+      } else if (value == "Yesterday") {
+        this.date =
+          "Date:" +
+          new Date(new Date().setDate(new Date().getDate() - 1))
+            .toJSON()
+            .slice(0, 10)
+            .replace(/-/g, "-") +
+          " ";
+      }
+      console.log(this.date);
     },
     SearchTerm() {
       return (
