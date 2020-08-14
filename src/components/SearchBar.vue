@@ -64,7 +64,8 @@ export default {
       trash: "",
       date: "",
       startDate: "",
-      endDate: ""
+      endDate: "",
+      term: ""
     };
   },
   methods: {
@@ -248,11 +249,18 @@ export default {
         }
       }
     },
+    changeTerm(e) {
+      this.term = e.target.value;
+    },
     SearchTerm() {
       return (
         <div>
           <label>Term</label>
-          <input type="text" id="search-term" />
+          <input
+            type="text"
+            id="search-term"
+            onChange={$event => this.changeTerm($event)}
+          />
         </div>
       );
     },
@@ -295,7 +303,8 @@ export default {
           this.name +
           this.date +
           this.starred +
-          this.trash
+          this.trash +
+          this.term
       );
     }
   }
