@@ -2,15 +2,10 @@
     "fields": {
         "Types": ["Site", "Page", "Advanced Search"],
         "Advance": ["All types", "Site", "Page"],
-        "Owners": ["Anyone", "Owned by me", "Not owned by me", "Specific Persion..."],
+        "Owners": ["Anyone", "Owned by me", "Not owned by me", "Specific Person..."],
         "Persons": ["admin", "designer", "editor", "sysadmin"],
-        "Starred": false,
-        "Trash": false,
-        "Date": ["Anytime", "Today", "Yesterday", "Last 7 days", "Custom..."],
-        "Start_Date": "",
-        "End_Date": "",
-        "Title": ""
-        
+        "Date": ["Anytime", "Today", "Yesterday", "Last 7 days", "Last 30 days", "Last 90 days", "Custom..."],
+        "Status": ["Starred", "In Trash"]
     },
     "items": [
         {

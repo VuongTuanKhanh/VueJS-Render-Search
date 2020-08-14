@@ -6,7 +6,10 @@ export default {
   render() {
     return (
       <div id="app">
-        <SearchBar onHandleSubmit={this.handleSubmitRequest} />
+        <SearchBar
+          propsFields={this.fields}
+          onHandleSubmit={this.handleSubmitRequest}
+        />
         <List propsItems={this.items} propsQueryString={this.queryString} />
       </div>
     );
@@ -14,6 +17,7 @@ export default {
   data() {
     return {
       items: [],
+      fields: {},
       queryString: ""
     };
   },

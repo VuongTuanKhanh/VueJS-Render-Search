@@ -34,7 +34,6 @@ export default {
           <div class="form-container">
             {this.Types()}
             {this.Owners()}
-            {this.SpecificName()}
             {this.Status()}
             {this.Dates()}
             {this.SearchTerm()}
@@ -51,10 +50,7 @@ export default {
   },
   data() {
     return {
-      type: "",
-      owner: "",
-      name: "",
-      isNotme: false
+      value: ""
     };
   },
   methods: {
@@ -88,9 +84,7 @@ export default {
       return (
         <div>
           <label>Type</label>
-          <select onChange={$event => this.changeType($event)}>
-            {options}
-          </select>
+          <select domPropsValue={this.value}>{options}</select>
         </div>
       );
     },
@@ -101,22 +95,7 @@ export default {
       return (
         <div>
           <label>Own</label>
-          <select onChange={$event => this.changeOwner($event)}>
-            {options}
-          </select>
-        </div>
-      );
-    },
-    SpecificName() {
-      return (
-        <div>
-          <input
-            type="text"
-            class="input-box"
-            id="SpecificPerson"
-            domPropsValue={this.owner}
-            onKeyup={$event => this.handleInput($event)}
-          />
+          <select>{options}</select>
         </div>
       );
     },
@@ -148,39 +127,7 @@ export default {
           <label>Term</label>
           <input type="text" id="search-term" />
         </div>
-      );
-    },
-    handleInput(e) {
-      if (event.keyCode == 13) {
-        this.owner = "Owner:" + e.target.value + " ";
-        document.getElementById("SpecificPerson").style.display = "none";
-      }
-    },
-    changeType(e) {
-      let value = e.target.value;
-      if (value != "All types") {
-        this.type = "Type:" + value + " ";
-      } else {
-        this.type = "";
-      }
-    },
-    changeOwner(e) {
-      let value = e.target.value;
-      if (value == "Specific Person...") {
-        this.owner = "";
-        document.getElementById("SpecificPerson").style.display = "block";
-      } else {
-        document.getElementById("SpecificPerson").style.display = "none";
-        this.owner = value;
-        if (this.owner == "Owned by me") {
-          this.owner = "Owner:Khanh ";
-        } else if (this.owner == "Not owned by me") {
-          this.owner = "";
-          this.isNotme = true;
-        } else {
-          this.owner = "";
-        }
-      }
+      )
     }
   }
 };
@@ -247,18 +194,6 @@ select {
   font-size: 18px;
   margin: 10px 0px 0px 10px;
   opacity: 0.8;
-}
-.input-box {
-  padding: 16px 20px;
-  position: relative;
-  cursor: pointer;
-  width: 50%;
-  font-size: 18px;
-  margin: auto;
-  margin-bottom: 10px;
-  margin-top: 10px;
-  opacity: 0.8;
-  display: none;
 }
 option {
   font-size: 20px;
