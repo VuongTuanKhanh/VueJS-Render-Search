@@ -10,6 +10,8 @@ export default {
             placeholder="Search..."
             class="search-bar"
             id="searchBar"
+            readonly
+            domPropsValue={this.queryString}
             onClick={() => this.openForm("myForm")}
           />
           <button class="close-button" onClick={this.closeAllForm}>
@@ -297,14 +299,20 @@ export default {
       }
     },
     handleSubmit() {
-      console.log(
+      document.getElementById("searchBar").value = this.queryString;
+      console.log(this.queryString);
+    }
+  },
+  computed: {
+    queryString() {
+      return (
         this.type +
-          this.owner +
-          this.name +
-          this.date +
-          this.starred +
-          this.trash +
-          this.term
+        this.owner +
+        this.name +
+        this.date +
+        this.starred +
+        this.trash +
+        this.term
       );
     }
   }
