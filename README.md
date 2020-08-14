@@ -2,7 +2,7 @@
 
 ### Hi there, I'm Vuong Tuan Khanh - aka [ArchiusVuong](https://www.facebook.com/cambo.li.9) 👋
 
-## I'm a Student, Developer, and Teacher at MindX!
+## I'm a Student, Developer, Teacher at MindX, and Freelancer at [Incredium](https://www.incredium.net/)!
 - 🔭 I’m currently teaching at [MindX School](https://mindx.edu.vn/) and working for **Mr. Jason Dang** from **[Incredium](https://www.incredium.net/)**!
 - 🌱 I’m currently learning Data Science, Machine Learning, and VueJS as well
 - 👯 I’m looking to learn as many as I can
