@@ -57,7 +57,9 @@ export default {
       isNotme: false,
       starred: "",
       trash: "",
-      date: ""
+      date: "",
+      startDate: "",
+      endDate: ""
     };
   },
   methods: {
@@ -173,8 +175,43 @@ export default {
             .slice(0, 10)
             .replace(/-/g, "-") +
           " ";
+      } else {
+        if (value == "Last 7 days") {
+          this.startDate = new Date(
+            new Date().setDate(new Date().getDate() - 7)
+          )
+            .toJSON()
+            .slice(0, 10)
+            .replace(/-/g, "-");
+          this.endDate = new Date()
+            .toJSON()
+            .slice(0, 10)
+            .replace(/-/g, "-");
+        } else if (value == "Last 30 days") {
+          this.startDate = new Date(
+            new Date().setDate(new Date().getDate() - 30)
+          )
+            .toJSON()
+            .slice(0, 10)
+            .replace(/-/g, "-");
+          this.endDate = new Date()
+            .toJSON()
+            .slice(0, 10)
+            .replace(/-/g, "-");
+        } else if (value == "Last 90 days") {
+          this.startDate = new Date(
+            new Date().setDate(new Date().getDate() - 90)
+          )
+            .toJSON()
+            .slice(0, 10)
+            .replace(/-/g, "-");
+          this.endDate = new Date()
+            .toJSON()
+            .slice(0, 10)
+            .replace(/-/g, "-");
+        }
       }
-      console.log(this.date);
+      console.log(this.startDate, this.endDate);
     },
     SearchTerm() {
       return (
