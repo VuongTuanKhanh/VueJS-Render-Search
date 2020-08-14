@@ -12,7 +12,9 @@ export default {
             id="searchBar"
             onClick={() => this.openForm("myForm")}
           />
-          <button class="close-button">X</button>
+          <button class="close-button" onClick={this.closeAllForm}>
+            X
+          </button>
         </div>
         <div class="form-popup" id="myForm">
           <div class="form-container">
@@ -37,8 +39,11 @@ export default {
             {this.SpecificName()}
             {this.Status()}
             {this.Dates()}
+            {this.SelectDate()}
             {this.SearchTerm()}
-            <button class="btn-search">Search</button>
+            <button class="btn-search" onClick={this.handleSubmit}>
+              Search
+            </button>
           </div>
         </div>
       </div>
@@ -74,6 +79,10 @@ export default {
       if (openid) {
         document.getElementById(openid).style.display = "block";
       }
+    },
+    closeAllForm() {
+      this.closeForm("myForm");
+      this.closeForm("advanceForm");
     },
     createQuery(type) {
       this.closeForm("myForm");
@@ -138,6 +147,28 @@ export default {
         </div>
       );
     },
+    SelectDate() {
+      return (
+        <div>
+          <input
+            type="date"
+            class="date-range"
+            onChange={$event => this.changeStartDate($event)}
+          />
+          <input
+            type="date"
+            class="date-range"
+            onChange={$event => this.changeEndDate($event)}
+          />
+        </div>
+      );
+    },
+    changeStartDate(e) {
+      this.startDate = e.target.value;
+    },
+    changeEndDate(e) {
+      this.endDate = e.target.value;
+    },
     Status() {
       let fieldName = this.fields.Status.map(type => {
         return (
@@ -153,13 +184,14 @@ export default {
       this.starred =
         "Starred:" + document.getElementById("Starred").checked + " ";
       this.trash = "Trash:" + document.getElementById("Trash").checked + " ";
-      console.log(this.starred, this.trash);
     },
     changeDate(e) {
       let value = e.target.value;
-      if (value == "Anytime") {
-        this.date = "";
-      } else if (value == "Today") {
+      for (let i of document.getElementsByClassName("date-range")) {
+        i.style.display = "none";
+      }
+      this.date = "";
+      if (value == "Today") {
         this.date =
           "Date:" +
           new Date()
@@ -209,9 +241,12 @@ export default {
             .toJSON()
             .slice(0, 10)
             .replace(/-/g, "-");
+        } else if (value == "Custom...") {
+          for (let i of document.getElementsByClassName("date-range")) {
+            i.style.display = "inline-block";
+          }
         }
       }
-      console.log(this.startDate, this.endDate);
     },
     SearchTerm() {
       return (
@@ -252,6 +287,16 @@ export default {
           this.owner = "";
         }
       }
+    },
+    handleSubmit() {
+      console.log(
+        this.type +
+          this.owner +
+          this.name +
+          this.date +
+          this.starred +
+          this.trash
+      );
     }
   }
 };
@@ -266,6 +311,18 @@ export default {
   position: fixed;
   width: 100%;
   z-index: 9;
+}
+.date-range {
+  position: relative;
+  cursor: pointer;
+  width: 35%;
+  font-size: 18px;
+  margin: auto;
+  margin-bottom: 10px;
+  margin-top: 15px;
+  margin-left: 10px;
+  opacity: 0.8;
+  display: none;
 }
 .form-container .btn:hover {
   opacity: 1;
