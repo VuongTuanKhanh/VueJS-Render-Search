@@ -9,6 +9,7 @@ export default {
         <SearchBar
           propsFields={this.fields}
           onHandleSubmit={this.handleSubmitRequest}
+          onSubmitQuery={this.handleAdvanceRequest}
         />
         <List propsItems={this.items} propsQueryString={this.queryString} />
       </div>
@@ -41,6 +42,9 @@ export default {
   methods: {
     handleSubmitRequest(queryString) {
       this.queryString = queryString;
+    },
+    handleAdvanceRequest(queryString, isNotme, startDate, endDate) {
+      console.log(queryString, isNotme, startDate, endDate);
     }
   }
 };

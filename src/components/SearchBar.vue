@@ -193,7 +193,6 @@ export default {
       for (let i of document.getElementsByClassName("date-range")) {
         i.style.display = "none";
       }
-      this.date = "";
       if (value == "Today") {
         this.date =
           "Date:" +
@@ -211,6 +210,7 @@ export default {
             .replace(/-/g, "-") +
           " ";
       } else {
+        this.date = "";
         if (value == "Last 7 days") {
           this.startDate = new Date(
             new Date().setDate(new Date().getDate() - 7)
@@ -299,8 +299,13 @@ export default {
       }
     },
     handleSubmit() {
-      document.getElementById("searchBar").value = this.queryString;
-      console.log(this.queryString);
+      this.$emit(
+        "submitQuery",
+        this.queryString,
+        this.isNotme,
+        this.startDate,
+        this.endDate
+      );
     }
   },
   computed: {
@@ -309,9 +314,9 @@ export default {
         this.type +
         this.owner +
         this.name +
-        this.date +
         this.starred +
         this.trash +
+        this.date +
         this.term
       );
     }
